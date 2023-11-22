@@ -8,5 +8,7 @@ I'm still learning Powershell so there won't be anything too crazy in here just 
 
 ## Current Highlights:
 
-- Automation of the leaver process when a user leaves the business.
+- Automation of distribution list creation process when multiple lists need to be created.
 - Automation of email reports for the entire business.
+- Automated check to see if forwarding is enabled on a list of emails.
+- Disable Windows Fast Boot with a registry tweak.
