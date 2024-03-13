@@ -1,0 +1,39 @@
+# Script to connect to Exchange Online and start the Managed Folder Assistant for a specified user's mailbox in Microsoft 365 using modern authentication.
+# This script supports multi-factor authentication (MFA) by prompting a Microsoft sign-in dialog for secure access.
+
+# Ensure the Exchange Online PowerShell Module (EXO V2) is installed and imported
+# You can install it via PowerShellGet with: Install-Module -Name ExchangeOnlineManagement -Force -AllowClobber
+
+# Connect to Exchange Online PowerShell using modern authentication
+Connect-ExchangeOnline -ShowProgress $true
+
+# Function to start the Managed Folder Assistant for mailbox retention policy application.
+function Start-MFAForUser {
+    param (
+        [string]$UserMailbox
+    )
+   
+    try {
+        Write-Host "Starting Managed Folder Assistant for mailbox: $UserMailbox" -ForegroundColor Cyan
+       
+        # Starting the Managed Folder Assistant to enforce retention policies immediately.
+        Start-ManagedFolderAssistant -Identity $UserMailbox
+       
+        Write-Host "Managed Folder Assistant started successfully for $UserMailbox." -ForegroundColor Green
+        Write-Host "Please note, processing may take some time to complete." -ForegroundColor Yellow
+    }
+    catch {
+        Write-Host "An error occurred: $_" -ForegroundColor Red
+    }
+}
+
+# Main script block to interact with the user.
+Write-Host "Enter the email address of the user's mailbox to update:" -ForegroundColor Yellow
+$userEmail = Read-Host "Email Address"
+Start-MFAForUser -UserMailbox $userEmail
+
+# Disconnect the session from Exchange Online after completing the task.
+Disconnect-ExchangeOnline -Confirm:$false
+
+# Indicates the script has completed its execution.
+Write-Host "Script execution completed. The session has been disconnected." -ForegroundColor Green
