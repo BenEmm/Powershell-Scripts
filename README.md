@@ -12,3 +12,4 @@ I'm still learning Powershell so there won't be anything too crazy in here just 
 - Automation of email reports for the entire business.
 - Automated check to see if forwarding is enabled on a list of emails.
 - Disable Windows Fast Boot with a registry tweak.
+- Force Retention Policies to apply NOW rather than whenever Microsoft runs the Managed Folder Assistant.
